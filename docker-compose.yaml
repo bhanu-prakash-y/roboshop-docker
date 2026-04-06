@@ -5,11 +5,41 @@ services:
    container_name: catalogue
    depends_on:
     - mongodb
+  user:
+    build: ./user
+    image: bhanuprakashy/user:1.0.0
+    container_name: user
+    depends_on:
+    - redis
+    - mongodb
+
+  cart:
+    build: ./cart
+    image: bhanuprakashy/cart:1.0.0
+    container_name: cart
+    depends_on:
+    - redis
+    - catalogue
+
+  frontend:
+    build: ./frontend
+    image: joindevops/frontend:1.0.0
+    container_name: frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - catalogue
+    - user
+    - cart  
   
   mongodb:
    build: ./mongodb
    image: bhanuprakashy/mongodb:1.0.0
    container_name: mongodb
+
+   redis:
+    image: redis:7.0
+    container_name: redis
 
 
 networks:
