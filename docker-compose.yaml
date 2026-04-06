@@ -1,20 +1,20 @@
 services:
-catalogue:
-  build: ./catalogue
-  image: bhanuprakashy/catalogue:1.0.0
-  container_name: catalogue
-  depends_on:
+  catalogue:
+   build: ./catalogue
+   image: bhanuprakashy/catalogue:1.0.0
+   container_name: catalogue
+   depends_on:
     - mongodb
   
-mongodb:
-  build: ./mongodb
-  image: bhanuprakashy/mongodb:1.0.0
-  container_name: mongodb
+  mongodb:
+   build: ./mongodb
+   image: bhanuprakashy/mongodb:1.0.0
+   container_name: mongodb
 
 
-  networks:
-    default:
-      driver: bridge
-      name: roboshop
-      external: false # if true,you createnetwork manually before running docker compose
+networks:
+   default:
+    driver: bridge
+    name: roboshop
+    external: false # if true,you createnetwork manually before running docker compose
 
