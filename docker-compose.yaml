@@ -7,7 +7,7 @@ catalogue:
     - mongodb
   
 mongodb:
-  buikd: ./mongodb
+  build: ./mongodb
   image: bhanuprakashy/mongodb:1.0.0
   container_name: mongodb
 
