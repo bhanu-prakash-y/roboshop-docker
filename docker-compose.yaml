@@ -20,10 +20,21 @@ services:
     depends_on:
     - redis
     - catalogue
+  shipping:
+    build: ./shipping
+    image: bhanuprakashy/shipping:1.0.0
+    container_name: shipping
+    depends_on:
+    - mysql
+    - cart
+  payment:
+    build: ./payment
+    image: bhanuprakashy/payment:1.0.0
+    container_name: payment  
 
   frontend:
     build: ./frontend
-    image: joindevops/frontend:1.0.0
+    image: bhanuprakashy/frontend:1.0.0
     container_name: frontend
     ports:
     - "80:80"
