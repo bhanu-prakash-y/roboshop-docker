@@ -1,9 +1,16 @@
 
-FROM node:20.20.2-alpine3.22
+FROM node:20.20.2-alpine3.23 as builder
 WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY *.js .
+
+
+
+FROM node:20.20.2-alpine3.23
+WORKDIR /app
+EXPOSE 8080
+COPY --from=builder /app /app
 ENV MONGO="true" \
     MONGO_URL="mongodb://mongodb:27017/catalogue"
 CMD ["node", "server.js"]
@@ -13,7 +20,9 @@ CMD ["node", "server.js"]
 
 
 
-# FROM node:20
+# dcoker for images size high
+
+# FROM node:20     
 # WORKDIR /app
 # COPY package.json .
 # RUN npm install
